@@ -2,13 +2,17 @@
 
 import fs from 'fs';
 import path from 'path';
-import { Schema } from '../data/schema';
+//import { Schema } from '../data/schema';
 import { graphql }  from 'graphql';
 import { introspectionQuery, printSchema } from 'graphql/utilities';
+import {getSchema} from '@risingstack/graffiti-mongoose';
+import mongooseSchema from '../data/mebel';
+
+const mSchema = getSchema(mongooseSchema);
 
 // Save JSON of full schema introspection for Babel Relay Plugin to use
 (async () => {
-  var result = await (graphql(Schema, introspectionQuery));
+  var result = await (graphql(mSchema, introspectionQuery));
   if (result.errors) {
     console.error(
       'ERROR introspecting schema: ',
@@ -25,5 +29,5 @@ import { introspectionQuery, printSchema } from 'graphql/utilities';
 // Save user readable type system shorthand of schema
 fs.writeFileSync(
   path.join(__dirname, '../data/schema.graphql'),
-  printSchema(Schema)
+  printSchema(mSchema)
 );

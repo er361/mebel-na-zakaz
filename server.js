@@ -3,18 +3,28 @@ import graphQLHTTP from 'express-graphql';
 import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import {Schema} from './data/schema';
+import Mebel from './data/mebel';
+import { json } from 'body-parser';
+import graffiti from '@risingstack/graffiti';
+import { getSchema } from '@risingstack/graffiti-mongoose';
+import mongoose from 'mongoose';
 
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
 
+
 // Expose a GraphQL endpoint
 var graphQLServer = express();
-graphQLServer.use('/', graphQLHTTP({
-  graphiql: true,
-  pretty: true,
-  schema: Schema,
+//connect to mongoose
+mongoose.connect('mongodb://localhost/graphql');
+graphQLServer.use(json());
+
+graphQLServer.use(graffiti.express({
+  schema: getSchema(Mebel)
 }));
+graphQLServer.use((req, res) => {
+  res.redirect('/graphql');
+});
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
 ));
