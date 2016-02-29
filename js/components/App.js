@@ -1,20 +1,17 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-class App extends React.Component {
-  showData(obj){
-    console.log(obj);
-  }
-  render() {
+import MebelList from './MebelList';
+import Mebel from './Mebel';
 
-    return (
+class App extends React.Component {
+  render(){
+    const mebels = this.props.viewer.mebels;
+    return(
       <div>
-        <h1>Mebel list</h1>
-        {this.props.viewer.mebels.edges.map(edge =>
-          <li key={edge.node.id}>{edge.node.name}</li>
-        )}
+        <MebelList mebelList={mebels} />
       </div>
-    );
+    )
   }
 }
 
@@ -22,20 +19,21 @@ export default Relay.createContainer(App, {
   prepareVariables(){
     return {
       limit: 100
-    }
+    };
   },
   fragments: {
     viewer: () => Relay.QL`
-      fragment on Viewer {
-        mebels(first: $limit){
-          edges{
-            node{
-              id
-              name
-            }
+    fragment on Viewer {
+      __typename
+      mebels(first: $limit) {
+        edges{
+          node{
+            id
           }
         }
+        ${MebelList.getFragment('mebelList')}
       }
-    `,
-  },
+    }
+    `
+  }
 });
