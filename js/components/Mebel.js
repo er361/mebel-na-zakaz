@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import Relay from 'react-relay';
 
+import {List, ListItem, Divider} from 'material-ui';
 class Mebel extends Component {
   render(){
     var {name, id} = this.props.mebel;
     return(
-      <li key={id}>{name}</li>
+      <section>
+        <ListItem key={id}>{name}</ListItem>
+        <Divider />
+      </section>
     )
   }
 }

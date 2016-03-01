@@ -1,19 +1,46 @@
 import React from 'react';
 import Relay from 'react-relay';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import MebelList from './MebelList';
 import Mebel from './Mebel';
+import MebelCreateForm from './MebelCreateForm';
 
-class App extends React.Component {
+import {Paper,Divider} from 'material-ui';
+import MyRawTheme from '../theme/theme';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+injectTapEventPlugin();
+
+const App = React.createClass({
+  //the key passed through context must be called "muiTheme"
+   childContextTypes : {
+     muiTheme: React.PropTypes.object,
+   },
+
+   getChildContext() {
+     return {
+       muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
+     };
+   },
   render(){
+    var style = {
+      padding: 20,
+      width: 500,
+      minWidth: 400,
+      margin: 'auto'
+    };
     const mebels = this.props.viewer.mebels;
     return(
       <div>
-        <MebelList mebelList={mebels} />
+        <Paper style={style}>
+          <MebelCreateForm />
+          <MebelList mebelList={mebels} />
+        </Paper>
       </div>
     )
   }
-}
+})
 
 export default Relay.createContainer(App, {
   prepareVariables(){
