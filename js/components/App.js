@@ -7,6 +7,8 @@ import MebelList from './MebelList';
 import Mebel from './Mebel';
 import MebelCreateForm from './MebelCreateForm';
 
+import AddMebelMutation from '../mutations/AddMebelMutation';
+
 import {Paper,Divider} from 'material-ui';
 import MyRawTheme from '../theme/theme';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -23,6 +25,12 @@ const App = React.createClass({
        muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
      };
    },
+   handleSave(name){
+     Relay.Store.commitUpdate( new AddMebelMutation({
+       name,
+       viewer: this.props.viewer
+     }))
+   },
   render(){
     var style = {
       padding: 20,
@@ -34,7 +42,7 @@ const App = React.createClass({
     return(
       <div>
         <Paper style={style}>
-          <MebelCreateForm />
+          <MebelCreateForm onSave={this.handleSave} />
           <MebelList mebelList={mebels} />
         </Paper>
       </div>
@@ -60,6 +68,7 @@ export default Relay.createContainer(App, {
         }
         ${MebelList.getFragment('mebelList')}
       }
+      ${AddMebelMutation.getFragment('viewer')}
     }
     `
   }

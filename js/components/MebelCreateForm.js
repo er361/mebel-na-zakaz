@@ -1,6 +1,9 @@
 import React from 'react';
+import Relay from 'react-relay';
 
 import {RaisedButton, TextField} from 'material-ui';
+
+import AddMebelMutation from '../mutations/AddMebelMutation';
 
 const MebelCreateForm  = React.createClass({
   getInitialState(){
@@ -19,8 +22,10 @@ const MebelCreateForm  = React.createClass({
     })
   },
   handleSubmit(){
-    this.cleanValue();
     console.log(this.refs.mebelName.getValue());
+    const name = this.refs.mebelName.getValue().trim();
+    this.props.onSave(name);
+    this.cleanValue();
   },
   render(){
     var style = {
