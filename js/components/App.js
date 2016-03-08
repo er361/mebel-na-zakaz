@@ -8,6 +8,7 @@ import Mebel from './Mebel';
 import MebelCreateForm from './MebelCreateForm';
 
 import AddMebelMutation from '../mutations/AddMebelMutation';
+import DeleteMebelMutation from '../mutations/DeleteMebelMutation';
 
 import {Paper,Divider} from 'material-ui';
 import MyRawTheme from '../theme/theme';
@@ -42,8 +43,9 @@ const App = React.createClass({
     return(
       <div>
         <Paper style={style}>
+          {/*triggerd by Component when call props 'onSave' as function*/ }
           <MebelCreateForm onSave={this.handleSave} />
-          <MebelList mebelList={mebels} />
+          <MebelList mebelList={mebels} viewer={this.props.viewer} />
         </Paper>
       </div>
     )
@@ -68,6 +70,7 @@ export default Relay.createContainer(App, {
         }
         ${MebelList.getFragment('mebelList')}
       }
+      ${MebelList.getFragment('viewer')}
       ${AddMebelMutation.getFragment('viewer')}
     }
     `
