@@ -3,14 +3,12 @@ import Relay from 'react-relay';
 
 import {RaisedButton, TextField} from 'material-ui';
 import { Form } from 'formsy-react';
-import FormsyText from 'formsy-material-ui/lib/FormsyText'
-import AddMebelMutation from '../mutations/AddMebelMutation';
+import FormsyText from 'formsy-material-ui/lib/FormsyText';
 
-const MebelCreateForm  = React.createClass({
-
+const CategoryCreateForm = React.createClass({
   getInitialState(){
     return {
-      mebelName: '',
+      catName: '',
       canSubmit: false
     }
   },
@@ -24,20 +22,13 @@ const MebelCreateForm  = React.createClass({
       canSubmit: false
     })
   },
-  cleanValue(){
-    this.replaceState(this.getInitialState());
-  },
-  handleInputChange(event) {
-    this.setState({
-        mebelName: event.target.value
-    })
-  },
+
   submitForm(model){
-    var name = model.mebelName.trim();
-    if(name.length !== 0)
-      this.props.onSave(name);
-      //доделать валидацию потом 'else'
-    this.refs.form.reset();
+    var catName = model.catName.trim();
+    if(catName.length !== 0 )
+      this.props.onSave(catName);
+      //доделать валидацию  'else'
+     this.refs.form.reset();
   },
   render(){
     var style = {
@@ -58,19 +49,21 @@ const MebelCreateForm  = React.createClass({
           onInvalid={this.disableButton}
           onValidSubmit={this.submitForm}
           ref='form'>
+
+          {/* Category name field*/}
           <FormsyText
-            hintText='Название мебели'
-            name='mebelName'
+            hintText='Название категории'
+            name='catName'
             validations={validations}
             validationErrors={validationErrors}
             required
-            value={this.state.mebelName}
-            onChange={this.handleInputChange}/>
+            />
+
           <br />
-          <RaisedButton  label='Submit' primary={true} type='submit'  disabled={!this.state.canSubmit} />
+          <RaisedButton  label='Submit' primary={true} type='submit'   disabled={!this.state.canSubmit} />
         </Form>
       </div>
     )
   }
 })
-export default MebelCreateForm;
+export default CategoryCreateForm;

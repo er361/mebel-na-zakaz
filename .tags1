@@ -1,0 +1,11 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+getChildContext	C:\work\relay-starter-kit\js\components\App.js	/^   getChildContext() {$/;"	function	line:25
+handleSave	C:\work\relay-starter-kit\js\components\App.js	/^   handleSave(name,children){$/;"	function	line:30
+render	C:\work\relay-starter-kit\js\components\App.js	/^  render(){$/;"	function	line:36
+prepareVariables	C:\work\relay-starter-kit\js\components\App.js	/^  prepareVariables(){$/;"	function	line:70
+mebels	C:\work\relay-starter-kit\js\components\App.js	/^      mebels(first: $limit) {$/;"	function	line:79

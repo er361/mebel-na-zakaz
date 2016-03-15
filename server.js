@@ -4,6 +4,7 @@ import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import Mebel from './data/mebel';
+import Category from './data/category';
 import { json } from 'body-parser';
 import graffiti from '@risingstack/graffiti';
 import { getSchema } from '@risingstack/graffiti-mongoose';
@@ -20,7 +21,7 @@ mongoose.connect('mongodb://localhost/graphql');
 graphQLServer.use(json());
 
 graphQLServer.use(graffiti.express({
-  schema: getSchema(Mebel)
+  schema: getSchema([Mebel,Category])
 }));
 graphQLServer.use((req, res) => {
   res.redirect('/graphql');
@@ -41,7 +42,7 @@ var compiler = webpack({
           plugins: ['./build/babelRelayPlugin'],
         },
         test: /\.js$/,
-      }
+      },
     ]
   },
   output: {filename: 'app.js', path: '/'}

@@ -3,14 +3,20 @@ import Relay from 'react-relay';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import MebelList from './MebelList';
-import Mebel from './Mebel';
-import MebelCreateForm from './MebelCreateForm';
+import MebelList from './mebel/MebelList';
+import Mebel from './mebel/Mebel';
+import MebelCreateForm from './mebel/MebelCreateForm';
+import CategoryCreateForm from './category/CategoryCreateForm';
 
-import AddMebelMutation from '../mutations/AddMebelMutation';
-import DeleteMebelMutation from '../mutations/DeleteMebelMutation';
+// import AddMebelMutation from '../mutations/mebel/AddMebelMutation';
+// import DeleteMebelMutation from '../mutations/mebel/DeleteMebelMutation';
+//
+// import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
 
-import {Paper,Divider} from 'material-ui';
+
+
+import {Paper,Divider, GridList, GridTile} from 'material-ui';
+import Colors from 'material-ui/lib/styles/colors';
 import MyRawTheme from '../theme/theme';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 injectTapEventPlugin();
@@ -20,34 +26,32 @@ const App = React.createClass({
    childContextTypes : {
      muiTheme: React.PropTypes.object,
    },
-
    getChildContext() {
      return {
        muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
      };
    },
-   handleSave(name){
-     Relay.Store.commitUpdate( new AddMebelMutation({
-       name,
-       viewer: this.props.viewer
-     }))
+   showData(data){
+     console.log(data)
+   },
+   handleSave(model){
+
+     console.log(model);
    },
   render(){
     var style = {
-      padding: 20,
-      width: 500,
-      minWidth: 400,
-      margin: 'auto'
+      h3:{
+        textAlign: 'center'
+      }
     };
-    const mebels = this.props.viewer.mebels;
+    const categorys = this.props.viewer.categorys;
     return(
-      <div>
-        <Paper style={style}>
-          {/*triggerd by Component when call props 'onSave' as function*/ }
-          <MebelCreateForm onSave={this.handleSave} />
-          <MebelList mebelList={mebels} viewer={this.props.viewer} />
-        </Paper>
-      </div>
+        <div className='container'>
+
+          <MebelCreateForm categoryList={categorys} onSave={this.handleSave} />
+          <hr />
+              <MebelList categoryList={categorys}  viewer={this.props.viewer} />
+        </div>
     )
   }
 })
@@ -62,16 +66,17 @@ export default Relay.createContainer(App, {
     viewer: () => Relay.QL`
     fragment on Viewer {
       __typename
-      mebels(first: $limit) {
+      categorys(first: $limit){
         edges{
           node{
             id
+            name
+            ${Mebel.getFragment('category')}
           }
         }
-        ${MebelList.getFragment('mebelList')}
+        ${MebelList.getFragment('categoryList')}
       }
       ${MebelList.getFragment('viewer')}
-      ${AddMebelMutation.getFragment('viewer')}
     }
     `
   }

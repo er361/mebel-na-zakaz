@@ -6,9 +6,10 @@ import path from 'path';
 import { graphql }  from 'graphql';
 import { introspectionQuery, printSchema } from 'graphql/utilities';
 import {getSchema} from '@risingstack/graffiti-mongoose';
-import mongooseSchema from '../data/mebel';
+import mebel from '../data/mebel';
+import category from '../data/category';
 
-const mSchema = getSchema(mongooseSchema);
+const mSchema = getSchema([mebel, category]);
 
 // Save JSON of full schema introspection for Babel Relay Plugin to use
 (async () => {

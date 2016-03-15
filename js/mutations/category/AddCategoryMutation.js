@@ -1,18 +1,18 @@
 import Relay from 'react-relay';
 
 
-export default class AddMebelMutation extends Relay.Mutation {
+export default class AddCategoryMutation extends Relay.Mutation {
   static fragments = {
     viewer: () => Relay.QL `fragment on Viewer {
       id
-      mebels {
+      categorys {
         count
       }
     }`
   }
 
   getMutation(){
-    return Relay.QL`mutation {addmebel}`;
+    return Relay.QL`mutation {addcategory}`;
   }
 
   getVariables(){
@@ -23,10 +23,10 @@ export default class AddMebelMutation extends Relay.Mutation {
 
   getFatQuery(){
     return Relay.QL `
-      fragment on addmebelPayload {
-        changedmebelEdge
+      fragment on addcategoryPayload {
+        changedcategoryEdge
         viewer {
-          mebels {
+          categorys {
             count
           }
         }
@@ -37,10 +37,10 @@ export default class AddMebelMutation extends Relay.Mutation {
     return [
       {
         type: 'RANGE_ADD',
-        parentName: 'viewer',
-        parentID: this.props.viewer.id,
-        connectionName: 'mebels',
-        edgeName: 'changedmebelEdge',
+        parentName: 'catViewer',
+        parentID: this.props.catViewer.id,
+        connectionName: 'categorys',
+        edgeName: 'changedcategoryEdge',
         rangeBehaviors: {
           '': 'prepend'
         }
