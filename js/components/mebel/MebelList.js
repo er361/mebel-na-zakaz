@@ -1,17 +1,25 @@
 import React, {Component} from 'react';
 import Relay from 'react-relay';
 
+import {List, ListItem, Paper} from 'material-ui';
+
 import Mebel from './Mebel';
 
 
+
 class MebelList extends Component {
+  constructor(props){
+    super(props);
+  }
   render(){
     return(
-      <div className='col-md-6 col-md-offset-3' >
-              { this.props.categoryList.edges.map(edge =>
-                    <Mebel key={edge.node.id} category={edge.node} viewer={this.props.viewer} />
-              )}
-      </div>
+        <Paper>
+          <List
+            subheader='Mebel list'>
+            {this.props.mebels.edges.map(edge =>
+            <Mebel key={edge.node.id} mebel={edge.node} viewer={this.props.viewer} />)}
+          </List>
+        </Paper>
     )
   }
 }
@@ -22,16 +30,18 @@ export default Relay.createContainer(MebelList, {
     viewer: () => Relay.QL `
     fragment on Viewer {
       ${Mebel.getFragment('viewer')}
-    }`,
-    categoryList: () => Relay.QL`
-    fragment on categoryConnection {
-      count
-      edges{
-        node{
-          id
-          ${Mebel.getFragment('category')}
+    }
+    `,
+    mebels: () => Relay.QL `
+      fragment on mebelConnection{
+        count
+        edges{
+          node{
+            id
+            ${Mebel.getFragment('mebel')}
+          }
         }
       }
-    }`
+    `
   }
 })

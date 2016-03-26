@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-
+import 'react-virtualized/styles.css';
 import App from './components/App';
 import AppHomeRoute from './routes/AppHomeRoute';
 import React from 'react';

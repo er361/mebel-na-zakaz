@@ -12,7 +12,6 @@ const MebelCreateForm  = React.createClass({
     return {
       mebelName: '',
       canSubmit: false,
-      value: this.props.categoryList.edges[0].node.id
     }
   },
   enableButton(){
@@ -24,16 +23,10 @@ const MebelCreateForm  = React.createClass({
     this.setState({
       canSubmit: false
     })
-
   },
   submitForm(model){
-    var name = model.mebelName.trim();
-    model.mebelName = name;
-    //console.log(model);
-    if(name.length !== 0)
       this.props.onSave(model);
-      //доделать валидацию  'else'
-     this.refs.form.reset();
+      this.refs.form.reset();
   },
   showData(data){
     console.log(data);
@@ -44,8 +37,7 @@ const MebelCreateForm  = React.createClass({
     }
     var validations = {
       minLength: 3,
-      matchRegexp: /^[а-я0-9]+$/
-
+      matchRegexp: /^[а-яА-Я0-9]+$/
     }
     var validationErrors = {
       minLength: 'Слишком короткое название',
@@ -59,23 +51,20 @@ const MebelCreateForm  = React.createClass({
           onValidSubmit={this.submitForm}
           ref='form'>
 
-
             <FormsyText
               hintText='Название мебели'
               name='mebelName'
               validations={validations}
               validationErrors={validationErrors}
-              required
-              />
+              required/>
             <br />
 
               <FormsySelect
                 name='category'
                 required
-                floatingLabelText='Название категории'
-                 >
-                {this.props.categoryList.edges.map(edge =>
-                <MenuItem key={edge.node.id} value={edge.node.id} primaryText={edge.node.name}/>)}
+                floatingLabelText='Название категории'>
+                 {this.props.categories.edges.map(edge =>
+                 <MenuItem value={edge.node.id} primaryText={edge.node.name} key={edge.node.id} />)}
               </FormsySelect>
 
           <br />
@@ -85,4 +74,19 @@ const MebelCreateForm  = React.createClass({
     )
   }
 })
-export default MebelCreateForm;
+
+export default Relay.createContainer(MebelCreateForm, {
+  fragments:{
+    categories: () => Relay.QL `
+      fragment on categoryConnection{
+        count
+        edges{
+          node{
+            id
+            name
+          }
+        }
+      }
+    `
+  }
+})

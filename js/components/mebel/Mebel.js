@@ -1,61 +1,44 @@
 import React, {Component} from 'react';
 import Relay from 'react-relay';
 
-import {TableRow,TableRowColumn} from 'material-ui';
-//import DeleteMebelMutation from '../../mutations/mebel/DeleteMebelMutation';
+import  {ListItem, IconButton} from 'material-ui';
+import Clear from 'material-ui/lib/svg-icons/content/clear';
+import DeleteMebelMutation from '../../mutations/mebel/DeleteMebelMutation';
 
 
 const Mebel = React.createClass({
-  // handleDestroyClick(){
-  //   Relay.Store.commitUpdate(
-  //     new DeleteMebelMutation({
-  //       id: this.props.mebel.id,
-  //       viewer: this.props.viewer
-  //     })
-  //   )
-  // },
+  handleDestroyClick(){
+    Relay.Store.commitUpdate(
+      new DeleteMebelMutation({
+        id: this.props.mebel.id,
+        viewer: this.props.viewer
+      })
+    )
+  },
 
   render(){
-    var {id,name} = this.props.category;
+    var {id,name} = this.props.mebel;
     return(
-        <li >
-          <span>{name}</span>
-          <ul>
-            {this.props.category.children.edges.map(edge =>
-              <li key={edge.node.id}>{edge.node.name}</li>)}
-          </ul>
-
-        </li>
+      <ListItem
+        key={id}
+        rightIconButton={<IconButton onClick={this.handleDestroyClick} touch={true}><Clear /></IconButton>}
+        primaryText={name} />
       )
   }
 })
 
 export default Relay.createContainer(Mebel, {
-  prepareVariables(){
-    return {
-      limit : 100
-    };
-  },
   fragments: {
     viewer: () => Relay.QL `
     fragment on Viewer {
-      id
-      categorys{
-        count
+      ${DeleteMebelMutation.getFragment('viewer')}
+    }
+    `,
+    mebel: () => Relay.QL `
+      fragment on mebel {
+        id
+        name
       }
-    }`,
-    category: () => Relay.QL `
-    fragment on category{
-      id
-      name
-      children(first: $limit){
-        edges{
-          node{
-            id
-            name
-          }
-        }
-      }
-    } `
+    `
   }
 })

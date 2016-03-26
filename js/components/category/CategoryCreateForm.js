@@ -24,9 +24,7 @@ const CategoryCreateForm = React.createClass({
   },
 
   submitForm(model){
-    var catName = model.catName.trim();
-    if(catName.length !== 0 )
-      this.props.onSave(catName);
+      this.props.onSave(model);
       //доделать валидацию  'else'
      this.refs.form.reset();
   },
@@ -36,11 +34,11 @@ const CategoryCreateForm = React.createClass({
     }
     var validations = {
       minLength: 3,
-      isWords: true
+      matchRegexp: /^[а-яА-Я0-9]+$/
     }
     var validationErrors = {
       minLength: 'Слишком короткое название',
-      isWords: 'только слова'
+      matchRegexp: 'Допускаеться только символы кирилицы и цифры'
     }
     return(
       <div style={style}>

@@ -3,14 +3,11 @@ import mongoose from 'mongoose';
 var CategorySchema = new mongoose.Schema({
   name: {
     type: String,
-    description: 'category name'
+    required: true
   },
-  children:
-  [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'mebel'
-    }
-  ]
+  description: {
+    type: String
+  }
 });
 
 var Category = mongoose.model('category', CategorySchema);

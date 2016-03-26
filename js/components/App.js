@@ -7,11 +7,11 @@ import MebelList from './mebel/MebelList';
 import Mebel from './mebel/Mebel';
 import MebelCreateForm from './mebel/MebelCreateForm';
 import CategoryCreateForm from './category/CategoryCreateForm';
+import CategoryList from './category/CategoryList';
 
-// import AddMebelMutation from '../mutations/mebel/AddMebelMutation';
-// import DeleteMebelMutation from '../mutations/mebel/DeleteMebelMutation';
-//
-// import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
+import AddMebelMutation from '../mutations/mebel/AddMebelMutation';
+
+ import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
 
 
 
@@ -34,24 +34,49 @@ const App = React.createClass({
    showData(data){
      console.log(data)
    },
-   handleSave(model){
-
-     console.log(model);
+   handleMebelSave(model){
+     //console.log(model);
+     Relay.Store.commitUpdate(new AddMebelMutation({
+       categoryId: model.category,
+       name: model.mebelName,
+       viewer:this.props.viewer
+     }))
+   },
+   handleCatSave(model){
+     //console.log(model);
+     Relay.Store.commitUpdate(new AddCategoryMutation({
+       name: model.catName,
+       viewer: this.props.viewer
+     }))
    },
   render(){
     var style = {
+      root: {
+        marginTop: 50,
+        paddingTop: 50,
+        paddingBottom: 50
+      },
       h3:{
         textAlign: 'center'
       }
     };
-    const categorys = this.props.viewer.categorys;
+    const mebels = this.props.viewer.mebels;
+    const categories = this.props.viewer.categorys;
     return(
-        <div className='container'>
+        <Paper className='container' style={style.root}>
+          <div className='row'>
+            <div className='col-md-5 col-md-offset-1'>
+              <MebelCreateForm  categories={categories} onSave={this.handleMebelSave} />
+              <MebelList viewer={this.props.viewer} mebels={mebels}  />
+            </div>
+            <div className='col-md-5 col-md-offset-1'>
+              <CategoryCreateForm  onSave={this.handleCatSave} />
+              <CategoryList viewer={this.props.viewer } categories={categories} />
+            </div>
+          </div>
 
-          <MebelCreateForm categoryList={categorys} onSave={this.handleSave} />
-          <hr />
-              <MebelList categoryList={categorys}  viewer={this.props.viewer} />
-        </div>
+
+        </Paper>
     )
   }
 })
@@ -60,23 +85,24 @@ export default Relay.createContainer(App, {
   prepareVariables(){
     return {
       limit: 100
-    };
+    }
   },
   fragments: {
     viewer: () => Relay.QL`
     fragment on Viewer {
       __typename
-      categorys(first: $limit){
-        edges{
-          node{
-            id
-            name
-            ${Mebel.getFragment('category')}
-          }
-        }
-        ${MebelList.getFragment('categoryList')}
+      mebels(first: $limit){
+        ${MebelList.getFragment('mebels')}
       }
       ${MebelList.getFragment('viewer')}
+      ${AddMebelMutation.getFragment('viewer')}
+      ,
+      categorys(first: $limit){
+        ${CategoryList.getFragment('categories')}
+        ${MebelCreateForm.getFragment('categories')}
+      }
+      ${CategoryList.getFragment('viewer')}
+      ${AddCategoryMutation.getFragment('viewer')}
     }
     `
   }

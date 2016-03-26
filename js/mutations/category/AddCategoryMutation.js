@@ -37,8 +37,8 @@ export default class AddCategoryMutation extends Relay.Mutation {
     return [
       {
         type: 'RANGE_ADD',
-        parentName: 'catViewer',
-        parentID: this.props.catViewer.id,
+        parentName: 'viewer',
+        parentID: this.props.viewer.id,
         connectionName: 'categorys',
         edgeName: 'changedcategoryEdge',
         rangeBehaviors: {
