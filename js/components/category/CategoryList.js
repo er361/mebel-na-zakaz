@@ -11,14 +11,11 @@ class CategoryList extends Component {
   }
   render(){
     return(
-      <Paper>
         <List
           subheader='Category list'>
           {this.props.categories.edges.map(edge =>
             <Category key={edge.node.id} category={edge.node} viewer={this.props.viewer} />)}
         </List>
-      </Paper>
-
     )
   }
 }

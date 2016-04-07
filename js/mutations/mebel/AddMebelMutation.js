@@ -18,7 +18,8 @@ export default class AddMebelMutation extends Relay.Mutation {
   getVariables(){
     return {
       categoryId: this.props.categoryId,
-      name: this.props.name
+      name: this.props.name,
+      image: this.props.image
     }
   }
 

@@ -13,13 +13,11 @@ class MebelList extends Component {
   }
   render(){
     return(
-        <Paper>
           <List
             subheader='Mebel list'>
             {this.props.mebels.edges.map(edge =>
             <Mebel key={edge.node.id} mebel={edge.node} viewer={this.props.viewer} />)}
           </List>
-        </Paper>
     )
   }
 }

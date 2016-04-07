@@ -10,9 +10,8 @@ import CategoryCreateForm from './category/CategoryCreateForm';
 import CategoryList from './category/CategoryList';
 
 import AddMebelMutation from '../mutations/mebel/AddMebelMutation';
-
- import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
-
+import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
+//import FileUploadMutation from '../mutations/FileUploadMutation';
 
 
 import {Paper,Divider, GridList, GridTile} from 'material-ui';
@@ -39,8 +38,9 @@ const App = React.createClass({
      Relay.Store.commitUpdate(new AddMebelMutation({
        categoryId: model.category,
        name: model.mebelName,
+       image: model.file,
        viewer:this.props.viewer
-     }))
+     }));
    },
    handleCatSave(model){
      //console.log(model);
@@ -65,17 +65,15 @@ const App = React.createClass({
     return(
         <Paper className='container' style={style.root}>
           <div className='row'>
-            <div className='col-md-5 col-md-offset-1'>
+            <Paper className='col-md-5 col-md-offset-1'>
               <MebelCreateForm  categories={categories} onSave={this.handleMebelSave} />
               <MebelList viewer={this.props.viewer} mebels={mebels}  />
-            </div>
-            <div className='col-md-5 col-md-offset-1'>
+            </Paper>
+            <Paper className='col-md-5 col-md-offset-1'>
               <CategoryCreateForm  onSave={this.handleCatSave} />
               <CategoryList viewer={this.props.viewer } categories={categories} />
-            </div>
+            </Paper>
           </div>
-
-
         </Paper>
     )
   }

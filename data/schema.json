@@ -134,7 +134,17 @@
                 },
                 {
                   "name": "name",
-                  "description": "mebel name",
+                  "description": "mebel  name",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "image",
+                  "description": "mebel image name",
                   "type": {
                     "kind": "SCALAR",
                     "name": "String",
@@ -370,7 +380,17 @@
                 },
                 {
                   "name": "name",
-                  "description": "mebel name",
+                  "description": "mebel  name",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "image",
+                  "description": "mebel image name",
                   "type": {
                     "kind": "SCALAR",
                     "name": "String",
@@ -618,7 +638,19 @@
             },
             {
               "name": "name",
-              "description": "mebel name",
+              "description": "mebel  name",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "image",
+              "description": "mebel image name",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -795,6 +827,18 @@
             },
             {
               "name": "NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "IMAGE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "IMAGE_DESC",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -1327,7 +1371,17 @@
             },
             {
               "name": "name",
-              "description": "mebel name",
+              "description": "mebel  name",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "image",
+              "description": "mebel image name",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -1463,7 +1517,19 @@
             },
             {
               "name": "name",
-              "description": "mebel name",
+              "description": "mebel  name",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "image",
+              "description": "mebel image name",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1525,7 +1591,17 @@
             },
             {
               "name": "name",
-              "description": "mebel name",
+              "description": "mebel  name",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "image",
+              "description": "mebel image name",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

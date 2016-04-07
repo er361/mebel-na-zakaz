@@ -8,7 +8,10 @@ var MebelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    description: 'mebel name'
+    description: 'mebel  name'
+  },image: {
+      type: String,
+      description: 'mebel image name'
   }
 })
 export default mongoose.model('mebel', MebelSchema);
