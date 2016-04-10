@@ -17,6 +17,7 @@ const MebelCreateForm  = React.createClass({
       mebelName: '',
       canSubmit: false,
       file: null,
+      preview: null,
     }
   },
   enableButton(){
@@ -41,6 +42,9 @@ const MebelCreateForm  = React.createClass({
      //console.log(model);
      this.props.onSave(model);
      this.refs.form.reset();
+     this.setState({
+       preview: null
+     });
   },
   showData(data){
     console.log(data);
@@ -54,8 +58,13 @@ const MebelCreateForm  = React.createClass({
             });
   },
   handleChange(e,results){
+
+    //console.log(results);
+    var preview = results[0][0].target.result;
+
     this.setState({
-      file: results
+      file: results,
+      preview: preview
     });
 
   },
@@ -93,7 +102,11 @@ const MebelCreateForm  = React.createClass({
               required/>
             <br />
             <div className='col-md-12'>
-              <FileReaderInput as='buffer' accept='image/*' name='image' onChange={this.handleChange}>
+              <div className='col-md-6'>
+                {this.state.preview ? <img  className='img-thumbnail' src={this.state.preview} /> : null }
+              </div>
+              <br />
+              <FileReaderInput as='url' accept='image/*' name='image' onChange={this.handleChange}>
                 <RaisedButton label='Upload file' />
               </FileReaderInput>
               <br />
