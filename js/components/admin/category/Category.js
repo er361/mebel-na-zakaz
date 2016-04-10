@@ -4,7 +4,7 @@ import Relay from 'react-relay';
 import {ListItem, IconButton} from 'material-ui';
 import Clear from 'material-ui/lib/svg-icons/content/clear';
 
-import DeleteCategoryMutation from '../../mutations/category/DeleteCategoryMutation';
+import DeleteCategoryMutation from '../../../mutations/category/DeleteCategoryMutation';
 
 const Category = React.createClass({
   handleDestroyClick(){

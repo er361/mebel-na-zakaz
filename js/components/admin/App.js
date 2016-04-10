@@ -9,14 +9,14 @@ import MebelCreateForm from './mebel/MebelCreateForm';
 import CategoryCreateForm from './category/CategoryCreateForm';
 import CategoryList from './category/CategoryList';
 
-import AddMebelMutation from '../mutations/mebel/AddMebelMutation';
-import AddCategoryMutation from '../mutations/category/AddCategoryMutation';
+import AddMebelMutation from '../../mutations/mebel/AddMebelMutation';
+import AddCategoryMutation from '../../mutations/category/AddCategoryMutation';
 //import FileUploadMutation from '../mutations/FileUploadMutation';
 
 
 import {Paper,Divider, GridList, GridTile} from 'material-ui';
 import Colors from 'material-ui/lib/styles/colors';
-import MyRawTheme from '../theme/theme';
+import MyRawTheme from '../../theme/theme';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 injectTapEventPlugin();
 
@@ -66,11 +66,11 @@ const App = React.createClass({
     return(
         <Paper className='container' style={style.root}>
           <div className='row'>
-            <Paper className='col-md-5 col-md-offset-1'>
+            <Paper className='col-md-4 col-md-offset-1'>
               <MebelCreateForm  categories={categories} onSave={this.handleMebelSave} />
               <MebelList viewer={this.props.viewer} mebels={mebels}  />
             </Paper>
-            <Paper className='col-md-5 col-md-offset-1'>
+            <Paper className='col-md-4 col-md-offset-1'>
               <CategoryCreateForm  onSave={this.handleCatSave} />
               <CategoryList viewer={this.props.viewer } categories={categories} />
             </Paper>

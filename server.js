@@ -42,8 +42,11 @@ var app = new WebpackDevServer(config, {
 });
 
 // Serve static resources
-app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.use( express.static(path.resolve(__dirname, 'public')));
 
+app.use('*',(request, response) => {
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
 app.listen(APP_PORT, () => {
   console.log(`App is now running on http://localhost:${APP_PORT}`);
 });

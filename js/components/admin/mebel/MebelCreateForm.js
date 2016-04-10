@@ -7,7 +7,7 @@ import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import FormsySelect from 'formsy-material-ui/lib/FormsySelect';
 import FileReaderInput from 'react-file-reader-input';
 import request from 'superagent';
-import AddMebelMutation from '../../mutations/mebel/AddMebelMutation';
+import AddMebelMutation from '../../../mutations/mebel/AddMebelMutation';
 
 
 const MebelCreateForm  = React.createClass({

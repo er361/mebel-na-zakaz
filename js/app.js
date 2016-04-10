@@ -1,15 +1,12 @@
-import 'babel-polyfill';
-import 'react-virtualized/styles.css';
-import App from './components/App';
-import AppHomeRoute from './routes/AppHomeRoute';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Relay from 'react-relay';
+import { RelayRouter } from 'react-router-relay';
+import { browserHistory, Route, IndexRoute } from 'react-router';
+import AppRoutes from './routes/AppRoutes';
+import '../node_modules/react-mdl/extra/material.js';
+import '../node_modules/react-mdl/extra/material.min.css';
 
 ReactDOM.render(
-  <Relay.RootContainer
-    Component={App}
-    route={new AppHomeRoute()}
-  />,
-  document.getElementById('root')
+  <RelayRouter history={browserHistory} routes={AppRoutes} />,
+   document.getElementById('root')
 );

@@ -3,7 +3,7 @@ import Relay from 'react-relay';
 
 import  {ListItem, IconButton} from 'material-ui';
 import Clear from 'material-ui/lib/svg-icons/content/clear';
-import DeleteMebelMutation from '../../mutations/mebel/DeleteMebelMutation';
+import DeleteMebelMutation from '../../../mutations/mebel/DeleteMebelMutation';
 
 
 const Mebel = React.createClass({
