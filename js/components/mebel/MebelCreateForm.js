@@ -36,9 +36,9 @@ const MebelCreateForm  = React.createClass({
        const [e, file] = result;
        model.file = file.name;
        this.uploadFile(e.target.result,file);
-       console.log(`Successfully uploaded ${file.name}!`);
+       //console.log(`Successfully uploaded ${file.name}!`);
      });
-     console.log(model);
+     //console.log(model);
      this.props.onSave(model);
      this.refs.form.reset();
   },

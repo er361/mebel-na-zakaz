@@ -40,6 +40,7 @@ var app = new WebpackDevServer(config, {
   publicPath: '/js/',
   stats: {colors: true}
 });
+
 // Serve static resources
 app.use('/', express.static(path.resolve(__dirname, 'public')));
 

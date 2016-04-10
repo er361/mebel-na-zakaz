@@ -17,10 +17,11 @@ const Mebel = React.createClass({
   },
 
   render(){
-    var {id,name} = this.props.mebel;
+    var {id,name, image} = this.props.mebel;
     return(
       <ListItem
         key={id}
+        leftIcon={<img src={`/images/${image}`} />}
         rightIconButton={<IconButton onClick={this.handleDestroyClick} touch={true}><Clear /></IconButton>}
         primaryText={name} />
       )
@@ -38,6 +39,7 @@ export default Relay.createContainer(Mebel, {
       fragment on mebel {
         id
         name
+        image
       }
     `
   }
