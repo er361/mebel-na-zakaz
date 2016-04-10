@@ -17,7 +17,8 @@ export default class AddCategoryMutation extends Relay.Mutation {
 
   getVariables(){
     return {
-      name: this.props.name
+      name: this.props.name,
+      image: this.props.image
     }
   }
 

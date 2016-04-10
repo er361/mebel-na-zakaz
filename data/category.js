@@ -5,6 +5,10 @@ var CategorySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  image: {
+    type: String,
+    description: 'filed for image name'
+  },
   description: {
     type: String
   }

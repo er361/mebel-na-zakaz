@@ -17,10 +17,11 @@ const Category = React.createClass({
     )
   },
   render(){
-    var {id,name} = this.props.category;
+    var {id,name, image} = this.props.category;
     return(
         <ListItem
           key={id}
+          leftIcon={<img src={`images/${image}`} />}
           rightIconButton={<IconButton onClick={this.handleDestroyClick} touch={true}><Clear /></IconButton>}
           primaryText={name} />
     )
@@ -37,6 +38,7 @@ export default Relay.createContainer(Category, {
     fragment on category {
       id
       name
+      image
     }`
   }
 })

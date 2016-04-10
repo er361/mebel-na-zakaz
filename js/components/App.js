@@ -46,7 +46,8 @@ const App = React.createClass({
      //console.log(model);
      Relay.Store.commitUpdate(new AddCategoryMutation({
        name: model.catName,
-       viewer: this.props.viewer
+       viewer: this.props.viewer,
+       image: model.file
      }))
    },
   render(){

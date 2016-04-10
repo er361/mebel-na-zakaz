@@ -6,7 +6,6 @@ import { Form } from 'formsy-react';
 import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import FormsySelect from 'formsy-material-ui/lib/FormsySelect';
 import FileReaderInput from 'react-file-reader-input';
-import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import AddMebelMutation from '../../mutations/mebel/AddMebelMutation';
 
@@ -101,6 +100,7 @@ const MebelCreateForm  = React.createClass({
               validationErrors={validationErrors}
               required/>
             <br />
+            {/* file upload block*/}
             <div className='col-md-12'>
               <div className='col-md-6'>
                 {this.state.preview ? <img  className='img-thumbnail' src={this.state.preview} /> : null }
@@ -111,6 +111,7 @@ const MebelCreateForm  = React.createClass({
               </FileReaderInput>
               <br />
             </div>
+            {/* file upload end*/}
               <FormsySelect
                 name='category'
                 required
