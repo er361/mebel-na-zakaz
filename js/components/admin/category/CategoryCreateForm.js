@@ -77,6 +77,7 @@ const CategoryCreateForm = React.createClass({
     return(
       <div style={style}>
         <Form
+          className='form-horizontal'
           onValid={this.enableButton}
           onInvalid={this.disableButton}
           onValidSubmit={this.submitForm}
@@ -93,11 +94,11 @@ const CategoryCreateForm = React.createClass({
           <br />
             {/* file upload block*/}
             <div className='col-md-12'>
-              <div className='col-md-6'>
+              <div className='col-md-6 form-group'>
                 {this.state.preview ? <img  className='img-thumbnail' src={this.state.preview} /> : null }
               </div>
               <br />
-              <FileReaderInput as='url' accept='image/*' name='image' onChange={this.handleChange}>
+              <FileReaderInput className='form-group' as='url' accept='image/*' name='image' onChange={this.handleChange}>
                 <RaisedButton label='Upload file' />
               </FileReaderInput>
               <br />

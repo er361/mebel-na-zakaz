@@ -53,7 +53,6 @@ const App = React.createClass({
   render(){
     var style = {
       root: {
-        marginTop: 50,
         paddingTop: 50,
         paddingBottom: 50
       },

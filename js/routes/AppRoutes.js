@@ -7,9 +7,9 @@ import Content from '../components/client/Content';
 import AdminViewerQuery from '../queries/AdminViewerQuery';
 
 export default (
-  <Route path='/' component={ClientContainer}>
-    <IndexRoute component={Content} />
-    <Route path='/admin' component={AdminContainer} queries={AdminViewerQuery} />
+  <Route path='/' component={ClientContainer} >
+    <IndexRoute component={Content} queries={AdminViewerQuery} />
+    <Route path='admin' component={AdminContainer} queries={AdminViewerQuery} />
   </Route>
 
 )

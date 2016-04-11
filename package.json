@@ -24,6 +24,7 @@
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
     "classnames": "2.2.1",
+    "connect-history-api-fallback": "^1.2.0",
     "express": "4.13.3",
     "express-graphql": "0.4.5",
     "fbjs": "^0.2.1",

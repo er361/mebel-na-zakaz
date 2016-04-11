@@ -11,6 +11,9 @@ import graffiti from '@risingstack/graffiti';
 import { getSchema } from '@risingstack/graffiti-mongoose';
 import mongoose from 'mongoose';
 import config from './webpack.config';
+import history from 'connect-history-api-fallback';
+
+
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
 const SERVER_PORT = 361;
@@ -29,6 +32,7 @@ graphQLServer.use((req, res) => {
   res.redirect('/graphql');
 });
 
+
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
 ));
@@ -38,18 +42,20 @@ var app = new WebpackDevServer(config, {
   contentBase: '/public/',
   proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
   publicPath: '/js/',
-  stats: {colors: true}
+  stats: {colors: true},
+  historyApiFallback: true
 });
 
 // Serve static resources
 app.use( express.static(path.resolve(__dirname, 'public')));
 
-app.use('*',(request, response) => {
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-});
+//app.use(history({index : './public/index.html'}));
+
+
 app.listen(APP_PORT, () => {
   console.log(`App is now running on http://localhost:${APP_PORT}`);
 });
+
 
 //multer
 var storage = multer.diskStorage({
@@ -65,5 +71,6 @@ app.use('/upload', multer({storage:storage}).any('image'),(req,res)=>{
   //  console.log(req.headers);
   //  console.log(req.body);
   //  console.log(req.files);
-   res.json(req.body);
+  //  res.json(req.body);
+  res.sendStatus(200);
 });
